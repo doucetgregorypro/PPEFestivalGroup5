@@ -106,12 +106,19 @@ function verifierDonneesEtabC($id, $nom, $adresseRue, $codePostal, $ville, $tel,
             }
         }
     }
-    if ($nom != "" && EtablissementDAO::isAnExistingName(true, $id, $nom)) {
-        ajouterErreur("L'établissement $nom existe déjà");
+    if ($nom != "") {
+        if (!ctype_alpha($nom)) {
+            ajouterErreur("Le nom ne peut être composé de chiffres ou de caractères spéciaux");
+        } else {
+            if(EtablissementDAO::isAnExistingName(true, $id, $nom)) {
+            ajouterErreur("L'établissement $nom existe déjà");
+        }   
     }
+    
     if ($codePostal != "" && !estUnCp($codePostal)) {
         ajouterErreur('Le code postal doit comporter 5 chiffres');
     }
+}
 }
 
 function verifierDonneesEtabM($id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable) {
