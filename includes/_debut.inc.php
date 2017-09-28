@@ -11,6 +11,10 @@
         <div style="text-align:right;">v. 2017</div>
         <!--  Tableau contenant le titre et les menus -->
         <table width="100%" cellpadding="0" cellspacing="0">
+            <!-- Logo -->
+            <tr>
+                <td class="logo"><img src="images/guitar.png"></td>
+            </tr>
             <!-- Titre -->
             <tr> 
                 <td class="titre">Festival Folklores du Monde <br>
