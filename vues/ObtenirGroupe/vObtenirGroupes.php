@@ -20,7 +20,6 @@ foreach ($lesGroupes as $unGroupe) {
     $nomGroupe = $unGroupe->getNom();
     $nmbPersonnes = $unGroupe->getNbPers();
     $nomPays = $unGroupe->getNomPays();
-    
     echo"<td>$nomGroupe</td>";
     echo"<td>$nmbPersonnes</td>";
     echo"<td>$nomPays</td>";
