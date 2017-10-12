@@ -19,6 +19,7 @@ echo"<table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
         <tr class='enTeteTabNonQuad'>
             <td colspan='3'><strong>Groupes</strong></td>
         </tr>";
+
 foreach ($lesGroupes as $unGroupe) {
     echo"<tr class='ligneTabNonQuad'>";
     $nomGroupe = $unGroupe->getNom();
