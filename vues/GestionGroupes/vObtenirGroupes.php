@@ -12,11 +12,15 @@ Bdd::connecter();
  * and open the template in the editor.
  */
 include ("includes/_debut.inc.php");
-echo"<table>";
+
 $lesGroupes = GroupeDAO::getAll();
 
+echo"<table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
+        <tr class='enTeteTabNonQuad'>
+            <td colspan='3'><strong>Groupes</strong></td>
+        </tr>";
 foreach ($lesGroupes as $unGroupe) {
-    echo"<tr>";
+    echo"<tr class='ligneTabNonQuad'>";
     $nomGroupe = $unGroupe->getNom();
     $nmbPersonnes = $unGroupe->getNbPers();
     $nomPays = $unGroupe->getNomPays();
