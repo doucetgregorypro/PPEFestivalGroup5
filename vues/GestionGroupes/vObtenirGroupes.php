@@ -18,7 +18,12 @@ $lesGroupes = GroupeDAO::getAll();
 echo"<table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
         <tr class='enTeteTabNonQuad'>
             <td colspan='3'><strong>Groupes</strong></td>
-        </tr>";
+        </tr>
+        <tr class='enTeteTabQuad'>
+            <td><strong>Nom</strong></td>
+            <td><strong>Nombre de personnes</strong></td>
+            <td><strong>Pays</strong></td>
+         </tr>";
 
 foreach ($lesGroupes as $unGroupe) {
     echo"<tr class='ligneTabNonQuad'>";
