@@ -85,8 +85,5 @@ insert into Attribution values ('0350773A', 'C3', 'g005', 1);
 insert into Attribution values ('0352072M', 'C1', 'g006', 1);
 insert into Attribution values ('0352072M', 'C2', 'g007', 3);
 insert into Attribution values ('0352072M', 'C3', 'g006', 3);
-
-
-
  
 

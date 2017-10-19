@@ -1,0 +1,5 @@
+CREATE TABLE Lieu ( 
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nom  VARCHAR(100) NOT NULL,
+    adr  VARCHAR(100) NOT NULL,
+    capacite INT);
