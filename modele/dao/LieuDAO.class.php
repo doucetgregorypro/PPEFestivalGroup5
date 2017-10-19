@@ -79,7 +79,7 @@ class LieuDAO {
         // qu'il soit besoin de refaire un appel explicite à bindParam
         $stmt->bindValue(':id', $objetMetier->getId());
         $stmt->bindValue(':nom', $objetMetier->getNom());
-        $stmt->bindValue(':adresse', $objetMetier->getAdresse());
+        $stmt->bindValue(':adr', $objetMetier->getAdresse());
         $stmt->bindValue(':capacite', $objetMetier->getCapacite());
     }
     
@@ -89,7 +89,7 @@ class LieuDAO {
      * @return boolean =FALSE si l'opération échoue
      */
     public static function insert(Etablissement $objet) {
-        $requete = "INSERT INTO Lieu VALUES (:id, :nom, :adresse, :capacite)";
+        $requete = "INSERT INTO Lieu VALUES (:id, :nom, :adr, :capacite)";
         $stmt = Bdd::getPdo()->prepare($requete);
         self::metierVersEnreg($objet, $stmt);
         $ok = $stmt->execute();
@@ -102,13 +102,15 @@ class LieuDAO {
      * @return boolean =TRUE si l'enregistrement est détruit, =FALSE si l'opération échoue
      */
     public static function delete($id) {
-        $ok = false;
+        try{
         $requete = "DELETE FROM Lieu WHERE ID = :id";
         $stmt = Bdd::getPdo()->prepare($requete);
         $stmt->bindParam(':id', $id);
         $ok = $stmt->execute();
         $ok = $ok && ($stmt->rowCount() > 0);
-        return $ok;
+        return true;
+        }catch(Exception $e) {
+        return false;}
     }
     
 

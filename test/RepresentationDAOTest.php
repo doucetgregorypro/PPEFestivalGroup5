@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Lieu : test</title>
+        <title>Representation : test</title>
     </head>
 
     <body>
@@ -19,32 +19,34 @@ require_once __DIR__ . '/../includes/autoload.php';
 
         Bdd::connecter();
 
-        echo "<h2>Test de LieuDAO</h2>";
+        echo "<h2>Test de RepresenationDAO</h2>";
 
-        $idLieu = '3';
+        $idRepresentation = '3';
 
         // Test n°1
         echo "<h3>1- getOneById</h3>";
-        $objet = LieuDAO::getOneById($idLieu);
+        $objet = RepresentationDAO::getOneById($idRepresentation);
         var_dump($objet);
 
         // Test n°2
         echo "<h3>2- getAll</h3>";
-        $lesObjets = LieuDAO::getAll();
+        $lesObjets = RepresentationDAO::getAll();
         var_dump($lesObjets);
 
         // Test n°3
         echo "<h3>3- insert</h3>";
-        $idLieu = '7357';
-        $nomLieu = 'TestLoc';
-        $adrLieu = '5 rue du Test';
-        $capLieu = 7357;
+        $idRepresentation = '34';
+        $lieuRepresentation = 'LE VILLAGE';
+        $heureDebutRepresentation = '14:00';
+        $heureFinRepresentation = '14:30';
+        $dateRepresentation = '2017-07-14';
+                
         try {
-            $lieu = new Lieu($idLieu, $nomLieu, $adrLieu, $capLieu);
-            $ok = $lieu;
+            $representation = new Representation($idRepresentation, $lieuRepresentation, $heureDebutRepresentation, $heureFinRepresentation, $date);
+            $ok = $representation;
             if ($ok) {
                 echo "<h4>ooo réussite de l'insertion ooo</h4>";
-                $objetLu = LieuDAO::getOneById($idLieu);
+                $objetLu = RepresentationDAO::getOneById($idRepresentation);
                 var_dump($objetLu);
             } else {
                 echo "<h4>*** échec de l'insertion ***</h4>";
@@ -56,7 +58,7 @@ require_once __DIR__ . '/../includes/autoload.php';
         // Test n°4
         echo "<h3>4- delete</h3>";
         try {
-            $ok = LieuDAO::delete($idLieu);
+            $ok = RepresentationDAO::delete($idRepresentation);
             if ($ok) {
                 echo "<h4>ooo réussite de la suppression ooo</h4>";
             } else {
