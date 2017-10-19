@@ -23,7 +23,7 @@ class LieuDAO {
     protected static function enregVersMetier(array $enreg) {
         $id = $enreg['ID'];
         $nom = $enreg['NOM'];
-        $adresse = $enreg['ADRESSE'];
+        $adresse = $enreg['ADR'];
         $capacite = $enreg['CAPACITE'];
         $unLieu = new Lieu($id, $nom, $adresse, $capacite);
 
@@ -110,5 +110,6 @@ class LieuDAO {
         $ok = $ok && ($stmt->rowCount() > 0);
         return $ok;
     }
+    
 
 }
