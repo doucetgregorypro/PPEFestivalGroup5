@@ -7,7 +7,7 @@ namespace modele\metier;
  * Lieu sur lequel ce produit un groupe.
  * @author Guyot Thomas
  */
-class Groupe {
+class Lieu {
     /**
      * identifiant du Lieu ("gxxx")
      * @var integer
