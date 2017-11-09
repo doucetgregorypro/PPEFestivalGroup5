@@ -2,7 +2,7 @@
 -- lors de la création de la base festival, il faut le jeu de caractères
 -- UTF-8 et l'interclassement associé utf8_general_ci (ce sont les valeurs 
 -- par défaut si vous utilisez le package EasyPHP du CERTA)
---CREATE DATABASE festival;
+CREATE DATABASE festival;
 GRANT ALL ON festival . * TO 'festival'@'localhost' IDENTIFIED BY 'secret';
 
 DROP TABLE IF EXISTS `Attribution`;
