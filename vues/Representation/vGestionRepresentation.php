@@ -15,9 +15,17 @@ Bdd::connecter();
 
 include("includes/_debut.inc.php");
 
-$lesRepresentations = Representation::getAll();
+$lesRepresentations = RepresentationDAO::getAllOrderedByDate();
 
-echo"<table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
+
+
+foreach ($lesRepresentations as $uneRepresentations) {
+    $Date = $uneRepresentations->getDate();
+    if(isset($prevDate)){
+        if($prevDate != $Date){
+            echo "</table>
+            <strong>$Date</strong>
+            <table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
         <tr class='enTeteTabNonQuad'>
             <td colspan='3'><strong>Groupes</strong></td>
         </tr>
@@ -28,19 +36,35 @@ echo"<table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
             <td><strong>Fin</strong></td>
             <td><strong>Date</strong></td>
          </tr>";
-
-foreach ($lesRepresentations as $uneRepresentations) {
+     }
+    }else{
+        echo"<strong>$Date</strong>
+            <table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
+        <tr class='enTeteTabNonQuad'>
+            <td colspan='3'><strong>Groupes</strong></td>
+        </tr>
+        <tr class='enTeteTabQuad'>
+            <td><strong>Lieu</strong></td>
+            <td><strong>Groupe</strong></td>
+            <td><strong>Début</strong></td>
+            <td><strong>Fin</strong></td>
+            <td><strong>Date</strong></td>
+         </tr>";
+    }
     echo"<tr class='ligneTabNonQuad'>";
     $nomLieu = $uneRepresentations->getLieu();
     $nomGroupe = $uneRepresentations->getGroupe();
-    $tDébut = $uneRepresentations->getDébut();
-    $tFin = $uneRepresentations->getFin();
-    $Date = $uneRepresentations->getDate();
+    $tDébut = $uneRepresentations->getHeureDebut();
+    $tFin = $uneRepresentations->getHeureFin();
+    
     
     echo"<td>$nomLieu</td>";
     echo"<td>$nomGroupe</td>";
     echo"<td>$tDébut</td>";
     echo"<td>$tFin</td>";
     echo"<td>$Date</td>";
+    echo"<td><a>Modifier</a></td>";
+    echo"<td><a>Suprimer</a></td>";
     echo"</tr>";
+    $prevDate = $Date;  
 }

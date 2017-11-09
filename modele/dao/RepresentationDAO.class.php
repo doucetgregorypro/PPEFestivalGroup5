@@ -19,7 +19,7 @@ class RepresentationDAO {
      * @return Representation
      */
     protected static function enregVersMetier(array $enreg) {
-        $idLieu = $enreg['ID'];
+        $idLieu = $enreg['ID_LIEU'];
         $idGroupe = $enreg['ID_GROUPE'];
         $heureDeb = $enreg['HEUREDEB'];
         $heureFin = $enreg['HEUREFIN'];
@@ -34,11 +34,10 @@ class RepresentationDAO {
      * Retourne la liste de toutes les représentations
      * @return array tableau d'objets de type Representation
      */
-    public static function getAllByDate($date) {
+    public static function getAllOrderedByDate() {
         $lesObjets = array();
-        $requete = "SELECT * FROM Representation WHERE DATEREPRES = :id ";
+        $requete = "SELECT * FROM Representation ORDER BY DATEREPRES";
         $stmt = Bdd::getPdo()->prepare($requete);
-        $stmt->bindParam(':id', $date);
         $ok = $stmt->execute();
         if ($ok) {
             // Tant qu'il y a des enregistrements dans la table
