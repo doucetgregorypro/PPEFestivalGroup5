@@ -34,10 +34,11 @@ class RepresentationDAO {
      * Retourne la liste de toutes les représentations
      * @return array tableau d'objets de type Representation
      */
-    public static function getAll() {
+    public static function getAllByDate($date) {
         $lesObjets = array();
-        $requete = "SELECT * FROM Representation";
+        $requete = "SELECT * FROM Representation WHERE DATEREPRES = :id ";
         $stmt = Bdd::getPdo()->prepare($requete);
+        $stmt->bindParam(':id', $date);
         $ok = $stmt->execute();
         if ($ok) {
             // Tant qu'il y a des enregistrements dans la table
@@ -91,6 +92,7 @@ class RepresentationDAO {
             }
         } 
         return $lesRepresentations;
-    } 
+    }
+    
 }
 
