@@ -21,18 +21,12 @@ class Representation {
     private $date;
    
 
-    function __construct($id, $lieu, $groupe, $heureDebut, $heureFin, $date) {
-        $this->id = $id;
+    function __construct($lieu, $groupe, $heureDebut, $heureFin, $date) {
         $this->lieu = $lieu;
         $this->groupe = $groupe;
         $this->heureDebut = $heureDebut;
         $this->heureFin = $heureFin;
         $this->date = $date;
-
-    }
-
-    function getId() {
-        return $this->id;
     }
 
     function getLieu() {
@@ -55,14 +49,6 @@ class Representation {
         return $this->date;
     }
 
-
-    
-    }
-
-    function setId($id) {
-        $this->id = $id;
-    }
-
     function setLieu($lieu) {
         $this->lieu = $lieu;
     }
@@ -82,8 +68,4 @@ class Representation {
     function setDate($date) {
         $this->date = $date;
     }
-
-
-
-
-
+}
