@@ -35,18 +35,18 @@ require_once __DIR__ . '/../includes/autoload.php';
 
         // Test n°3
         echo "<h3>3- insert</h3>";
-        $idRepresentation = '34';
-        $lieuRepresentation = 'LE VILLAGE';
+        $groupeRepresentation = '4';
+        $lieuRepresentation = '1';
         $heureDebutRepresentation = '14:00';
         $heureFinRepresentation = '14:30';
         $dateRepresentation = '2017-07-14';
                 
         try {
-            $representation = new Representation($idRepresentation, $lieuRepresentation, $heureDebutRepresentation, $heureFinRepresentation, $date);
+            $representation = new Representation($groupeRepresentation, $lieuRepresentation, $heureDebutRepresentation, $heureFinRepresentation, $dateRepresentation);
             $ok = $representation;
             if ($ok) {
                 echo "<h4>ooo réussite de l'insertion ooo</h4>";
-                $objetLu = RepresentationDAO::getOneById($idRepresentation);
+                $objetLu = RepresentationDAO::getAllByGroupe($groupeRepresentation);
                 var_dump($objetLu);
             } else {
                 echo "<h4>*** échec de l'insertion ***</h4>";
