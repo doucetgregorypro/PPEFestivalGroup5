@@ -23,6 +23,6 @@ $action = $_REQUEST['action'];
 
 switch ($action) {
     case 'initial' :
-        include("vues/vGestionRepresentation.php");
+        include("vues/Representation/vGestionRepresentation.php");
         break;
 }
