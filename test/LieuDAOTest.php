@@ -41,7 +41,7 @@ require_once __DIR__ . '/../includes/autoload.php';
         $capLieu = 7357;
         try {
             $lieu = new Lieu($idLieu, $nomLieu, $adrLieu, $capLieu);
-            $ok = $lieu;
+            $ok = LieuDAO::insert($lieu);
             if ($ok) {
                 echo "<h4>ooo réussite de l'insertion ooo</h4>";
                 $objetLu = LieuDAO::getOneById($idLieu);

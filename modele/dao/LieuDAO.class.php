@@ -3,6 +3,7 @@
 namespace modele\dao;
 
 use modele\metier\Lieu;
+use PDOStatement;
 use PDO;
 
 
@@ -88,7 +89,7 @@ class LieuDAO {
      * @param Lieu $objet objet métier à insérer
      * @return boolean =FALSE si l'opération échoue
      */
-    public static function insert(Etablissement $objet) {
+    public static function insert(Lieu $objet) {
         $requete = "INSERT INTO Lieu VALUES (:id, :nom, :adr, :capacite)";
         $stmt = Bdd::getPdo()->prepare($requete);
         self::metierVersEnreg($objet, $stmt);
@@ -102,15 +103,13 @@ class LieuDAO {
      * @return boolean =TRUE si l'enregistrement est détruit, =FALSE si l'opération échoue
      */
     public static function delete($id) {
-        try{
+        $ok = false;
         $requete = "DELETE FROM Lieu WHERE ID = :id";
         $stmt = Bdd::getPdo()->prepare($requete);
         $stmt->bindParam(':id', $id);
         $ok = $stmt->execute();
         $ok = $ok && ($stmt->rowCount() > 0);
-        return true;
-        }catch(Exception $e) {
-        return false;}
+        return $ok;
     }
     
 
