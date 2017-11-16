@@ -2,7 +2,7 @@
 
 .menus 
 {
-   font:12px "Comic Sans MS", "Times New Roman", Times, serif;
+   font:12px "Calibri", "Comic Sans MS", "Times New Roman", Times, serif;
    /* list-style-type est à préciser impérativement sinon l'onglet actif est 
    marqué d'un point avec certains navigateurs (ex : FireFox) */
    list-style-type:none;
