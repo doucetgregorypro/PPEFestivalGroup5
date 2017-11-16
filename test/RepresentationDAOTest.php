@@ -9,11 +9,9 @@
 
         <?php
 
-        use modele\dao\OffreDAO;
-        use modele\dao\GroupeDAO;
-        use modele\dao\LieuDAO;
+        use modele\dao\RepresentationDAO;
         use modele\dao\Bdd;
-        use modele\metier\Lieu;
+        use modele\metier\Representation;
 
 require_once __DIR__ . '/../includes/autoload.php';
 
@@ -21,44 +19,65 @@ require_once __DIR__ . '/../includes/autoload.php';
 
         echo "<h2>Test de RepresenationDAO</h2>";
 
-        $idRepresentation = '3';
+        $idGroupe = 'g008';
+        $idLieu = 1;
 
         // Test n°1
         echo "<h3>1- getOneById</h3>";
-        $objet = RepresentationDAO::getOneById($idRepresentation);
-        var_dump($objet);
+        try {
+            $objet = RepresentationDAO::getOneById($idGroupe, $idLieu);
+            var_dump($objet);
+        } catch (Exception $ex) {
+            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
+        }
 
         // Test n°2
         echo "<h3>2- getAll</h3>";
-        $lesObjets = RepresentationDAO::getAll();
-        var_dump($lesObjets);
-
-        // Test n°3
-        echo "<h3>3- insert</h3>";
-        $groupeRepresentation = '4';
-        $lieuRepresentation = '1';
-        $heureDebutRepresentation = '14:00';
-        $heureFinRepresentation = '14:30';
-        $dateRepresentation = '2017-07-14';
-                
         try {
-            $representation = new Representation($groupeRepresentation, $lieuRepresentation, $heureDebutRepresentation, $heureFinRepresentation, $dateRepresentation);
-            $ok = $representation;
+            $lesObjets = RepresentationDAO::getAllOrderedByDate();
+            var_dump($lesObjets);
+        } catch (Exception $ex) {
+            echo "<h4>*** échec de la requête ***</h4>" . $ex->getMessage();
+        }
+/*
+        // Test n°3
+        echo "<h3>3- update</h3>";
+        $lieuRepresentation = 1;
+        $groupeRepresentation = 'g008';
+        $heureDebutRepresentation = '20:00:00';
+        $heureFinRepresentation = '22:00:00';
+        $dateRepresentation = '2017-07-12';
+        
+        try {
+            $representation = new Representation($lieuRepresentation, $groupeRepresentation, $heureDebutRepresentation, $heureFinRepresentation, $dateRepresentation);
+            $ok = RepresentationDAO::update($representation);
             if ($ok) {
-                echo "<h4>ooo réussite de l'insertion ooo</h4>";
-                $objetLu = RepresentationDAO::getAllByGroupe($groupeRepresentation);
+                $objetLu = RepresentationDAO::getOneById($lieuRepresentation, $groupeRepresentation);
                 var_dump($objetLu);
+                $heureDebutRepresentation = '20:30:00';
+                $ok = RepresentationDAO::update($representation); //remettre la bonne info
             } else {
-                echo "<h4>*** échec de l'insertion ***</h4>";
+                echo "<h4>*** échec de la mise à jour, erreur DAO ***</h4>";
             }
         } catch (Exception $e) {
-            echo "<h4>*** échec de la requête ***</h4>" . $e->getMessage();
+            echo "<h4>*** échec de la requête, erreur PDO ***</h4>" . $e->getMessage();
         }
+*/
+        /*
+         * 
+         * -------Fonctionnel mais aucune fonction insert, 
+         * donc rajout de la ligne supprimer à la main si execution
+         * du test de la methode update ----------
+         */
         
+        /*
         // Test n°4
         echo "<h3>4- delete</h3>";
+        
+        $lieuRepresentation = 1;
+        $groupeRepresentation = 'g008';
         try {
-            $ok = RepresentationDAO::delete($idRepresentation);
+            $ok = RepresentationDAO::delete($lieuRepresentation, $groupeRepresentation);
             if ($ok) {
                 echo "<h4>ooo réussite de la suppression ooo</h4>";
             } else {
@@ -67,6 +86,7 @@ require_once __DIR__ . '/../includes/autoload.php';
         } catch (Exception $e) {
             echo "<h4>*** échec de la requête ***</h4>" . $e->getMessage();
         }
+         */
         
         Bdd::deconnecter();
         ?>
