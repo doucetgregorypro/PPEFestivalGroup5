@@ -30,5 +30,11 @@ switch ($action) {
         $nomGroupe = $_REQUEST['nomGroupe'];
         include ("vues/Representation/vModificationRepresentation.php");
         break;
+    case 'suprimerheb':
+        $nl=$_GET["nomLieu"];
+        $ng=$_GET["nomGroupe"];
+        RepresentationDAO::delete($nl,$ng);
+        include("vues/Representation/vGestionRepresentation.php");
+        break;
 }
 Bdd::deconnecter();
