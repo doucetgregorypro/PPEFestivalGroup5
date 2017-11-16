@@ -15,12 +15,15 @@ Bdd::connecter();
 
 include("includes/_debut.inc.php");
 
+//on obtient toute les representation depuis la bdd
+
 $lesRepresentations = RepresentationDAO::getAllOrderedByDate();
 
 
-
+// pour chaque representation on créer une ligne dans un tableau
 foreach ($lesRepresentations as $uneRepresentations) {
     $Date = $uneRepresentations->getDate();
+    //on teste si il s'agit du premier tableau ou si on change de date dans ce cas on créer une nouvelle table
     if(isset($prevDate)){
         if($prevDate != $Date){
             echo "</table>
@@ -55,13 +58,14 @@ foreach ($lesRepresentations as $uneRepresentations) {
             <td></td>
          </tr>";
     }
+    //on stock nos valeur dans des variables
     echo"<tr class='ligneTabNonQuad'>";
     $nomLieu = $uneRepresentations->getLieu();
     $nomGroupe = $uneRepresentations->getGroupe();
     $tDébut = $uneRepresentations->getHeureDebut();
     $tFin = $uneRepresentations->getHeureFin();
     
-    
+    //on ecrit les données dans une ligne dans le tableau
     echo"<td>$nomLieu</td>";
     echo"<td>$nomGroupe</td>";
     echo"<td>$tDébut</td>";
