@@ -9,7 +9,7 @@
         use modele\metier\Representation;
         require_once __DIR__ . '/../includes/autoload.php';
         echo "<h2>Test unitaire de la classe métier Representation</h2>";
-        $objet = new Representation("LE VILLAGE","Aira da Pedra","14:00","14:30");
+        $objet = new Representation("LE VILLAGE","Aira da Pedra","14:00","14:30","2017-07-14");
         var_dump($objet);
         ?>
     </body>
