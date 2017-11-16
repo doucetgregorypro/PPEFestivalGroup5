@@ -40,7 +40,6 @@ echo '<br/><p style="display: inline-block">ok</p>';
 echo "<input placeholder=". $uneRepre->getHeureFin() ."></input>";
 echo '<br/><p style="display: inline-block">date: </p>';
 echo "<input placeholder=".$uneRepre->getDate()."></input>";
-
 echo "<a href=cRepresentation.php?action=initial><button>Retour</button></a>";
 
 Bdd::deconnecter();
