@@ -1,11 +1,26 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-$nomLieu = $_GET["nomLieu"];
-$nomGroupe = $_GET["nomGroupe"];
+use modele\dao\RepresentationDAO;
+use modele\metier\Representation;
+use modele\dao\Bdd;
+
+require_once __DIR__ . '/../../includes/autoload.php';
+Bdd::connecter();
+
+$idGroupe = $_GET["nomGroupe"];
+$idLieu = $_GET["nomLieu"];
 
 
+$uneRepre = RepresentationDAO::getOneById($idGroupe, $idLieu);
+
+if ($uneRepre == null){
+    echo '1';
+}else{
+    echo '2';
+}
+
+$val = $uneRepre->getHeureDebut();
+
+echo "$val";
+
+Bdd::deconnecter();

@@ -145,5 +145,19 @@ class RepresentationDAO {
         return $ok;
     }
     
+    public  static function getOneById($idGroupe, $idLieu){
+        $objetConstruit = null;
+        $requete = "SELECT * FROM Representation WHERE id_groupe = :idGroupe AND id_lieu = :idLieu";
+        $stmt = Bdd::getPdo()->prepare($requete);
+        $stmt->bindParam(':idGroupe', $idGroupe);
+        $stmt->bindParam(':idLieu', $idLieu);
+        $ok = $stmt->execute();
+        // attention, $ok = true pour un select ne retournant aucune ligne
+        if ($ok && $stmt->rowCount() > 0) {
+            $objetConstruit = self::enregVersMetier($stmt->fetch(PDO::FETCH_ASSOC));
+        }
+        return $objetConstruit;
+    }
+    
 }
 
