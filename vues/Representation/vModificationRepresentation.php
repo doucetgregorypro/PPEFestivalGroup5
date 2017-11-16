@@ -13,12 +13,13 @@ Bdd::connecter();
 
 include("includes/_debut.inc.php");
 
+//on récupere la representation choisie ainsi que une liste de tous les objet lieu et tous les objets groupes
 $idGroupe = $_GET["nomGroupe"];
 $idLieu = $_GET["nomLieu"];
 $uneRepre = RepresentationDAO::getOneById($idGroupe, $idLieu);
 $AllLieu = LieuDAO::getAll();
 $AllGroupe = GroupeDAO::getAll();
-
+// on créer une liste déroulante contenant les lieu
 echo '<select>';
 foreach ($AllLieu as $lieu){
     $nomLieu = $lieu->getNom();
