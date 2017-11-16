@@ -98,7 +98,7 @@ class RepresentationDAO {
      * @param type $objetMetier une Representation
      * @param type $stmt requête préparée
      */
-    protected static function metierVersEnreg(Etablissement $objetMetier, PDOStatement $stmt) {
+    protected static function metierVersEnreg(Representation $objetMetier, PDOStatement $stmt) {
         // On utilise bindValue plutôt que bindParam pour éviter des variables intermédiaires
         // Note : bindParam requiert une référence de variable en paramètre n°2 ; 
         // avec bindParam, la valeur affectée à la requête évoluerait avec celle de la variable sans
@@ -108,6 +108,8 @@ class RepresentationDAO {
         $stmt->bindValue(':heureDeb', $objetMetier->getHeureDebut());
         $stmt->bindValue(':heureFin', $objetMetier->getHeureFin());
         $stmt->bindValue(':dateRepres', $objetMetier->getDate());
+        $stmt->bindParam(':idGroupeRecherche', $objetMetier->getGroupe());
+        $stmt->bindParam(':idLieuRecherche', $objetMetier->getLieu());
     }
     
     /**
@@ -116,15 +118,13 @@ class RepresentationDAO {
      * @param Representation $objet objet métier à mettre à jour
      * @return boolean =FALSE si l'opérationn échoue
      */
-    public static function update($idGroupe, $idLieu, Representation $objet) {
+    public static function update(Representation $objet) {
         $ok = false;
-        $requete = "UPDATE Representation SET ID_LIEU=:idGroupe, ID_GROUPE=:idLieu,
+        $requete = "UPDATE Representation SET ID_LIEU=:idLieu, ID_GROUPE=:idGroupe,
            HEUREDEB=:heureDeb, HEUREFIN=:heureFin, DATEREPRES=:dateRepres
            WHERE ID_GROUPE=:idGroupeRecherche AND ID_LIEU=:idLieuRecherche";
         $stmt = Bdd::getPdo()->prepare($requete);
         self::metierVersEnreg($objet, $stmt);
-        $stmt->bindParam(':idGroupeRecherche', $idGroupe);
-        $stmt->bindParam(':idLieuRecherche', $idLieu);
         $ok = $stmt->execute();
         return ($ok && $stmt->rowCount() > 0);
     }
@@ -134,7 +134,7 @@ class RepresentationDAO {
      * @param string identifiant du groupe et du lieu de la representation à détruire
      * @return boolean =TRUE si l'enregistrement est détruit, =FALSE si l'opération échoue
      */
-    public static function delete($idGroupe, $idLieu) {
+    public static function delete($idLieu, $idGroupe) {
         $ok = false;
         $requete = "DELETE FROM Representation WHERE ID_GROUPE = :idGroupe AND ID_LIEU = :idLieu";
         $stmt = Bdd::getPdo()->prepare($requete);
