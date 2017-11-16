@@ -27,7 +27,7 @@ foreach ($lesRepresentations as $uneRepresentations) {
             <strong>$Date</strong>
             <table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
         <tr class='enTeteTabNonQuad'>
-            <td colspan='3'><strong>Groupes</strong></td>
+            <td colspan='7'><strong>Groupes</strong></td>
         </tr>
         <tr class='enTeteTabQuad'>
             <td><strong>Lieu</strong></td>
@@ -35,13 +35,15 @@ foreach ($lesRepresentations as $uneRepresentations) {
             <td><strong>Début</strong></td>
             <td><strong>Fin</strong></td>
             <td><strong>Date</strong></td>
+            <td></td>
+            <td></td>
          </tr>";
      }
     }else{
         echo"<strong>$Date</strong>
             <table width='60%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
         <tr class='enTeteTabNonQuad'>
-            <td colspan='3'><strong>Groupes</strong></td>
+            <td colspan='7'><strong>Groupes</strong></td>
         </tr>
         <tr class='enTeteTabQuad'>
             <td><strong>Lieu</strong></td>
@@ -49,6 +51,8 @@ foreach ($lesRepresentations as $uneRepresentations) {
             <td><strong>Début</strong></td>
             <td><strong>Fin</strong></td>
             <td><strong>Date</strong></td>
+            <td></td>
+            <td></td>
          </tr>";
     }
     echo"<tr class='ligneTabNonQuad'>";
@@ -63,8 +67,9 @@ foreach ($lesRepresentations as $uneRepresentations) {
     echo"<td>$tDébut</td>";
     echo"<td>$tFin</td>";
     echo"<td>$Date</td>";
-    echo"<td><a>Modifier</a></td>";
-    echo"<td><a>Suprimer</a></td>";
+    echo"<td><a href='cRepresentation.php?action=modifierheb&nomLieu=$nomLieu&nomGroupe=$nomGroupe'>Modifier</a></td>";
+    echo"<td><a href='cRepresentation.php?action=suprimerheb&nomLieu=$nomLieu&nomGroupe=$nomGroupe'>Suprimer</a></td>";
     echo"</tr>";
     $prevDate = $Date;  
 }
+Bdd::deconnecter();

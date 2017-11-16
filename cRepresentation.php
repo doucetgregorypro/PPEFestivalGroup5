@@ -25,4 +25,10 @@ switch ($action) {
     case 'initial' :
         include("vues/Representation/vGestionRepresentation.php");
         break;
+    case 'modifierheb':
+        $nomLieu = $_REQUEST['nomLieu'];
+        $nomGroupe = $_REQUEST['nomGroupe'];
+        include ("vues/Representation/vModificationRepresentation.php");
+        break;
 }
+Bdd::deconnecter();
