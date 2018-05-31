@@ -16,7 +16,7 @@ echo "
 <table width='55%' cellspacing='0' cellpadding='0' class='tabNonQuadrille'>
 
    <tr class='enTeteTabNonQuad'>
-      <td colspan='4'><strong>Etablissements</strong></td>
+      <td colspan='7'><strong>Etablissements</strong></td>
    </tr>";
 
 $lesEtablissements = EtablissementDAO::getAll();
@@ -24,10 +24,19 @@ $lesEtablissements = EtablissementDAO::getAll();
 foreach ($lesEtablissements as $unEtablissement) {
     $id = $unEtablissement->getId();
     $nom = $unEtablissement->getNom();
+    $type = $unEtablissement->getTypeEtablissement();
+    $autorisation = $unEtablissement->getDemandeAutorisation();
+    $frais = $unEtablissement->getFraisHebergement();
     echo "
 		<tr class='ligneTabNonQuad'>
          <td width='52%'>$nom</td>
+
+         <td>$type</td>
+             
+         <td>$autorisation</td>
          
+         <td width='10%'>$frais €</td>
+
          <td width='16%' align='center'> 
          <a href='cGestionEtablissements.php?action=detailEtab&id=$id'>
          Voir détail</a></td>

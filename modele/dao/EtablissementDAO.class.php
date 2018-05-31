@@ -31,8 +31,12 @@ class EtablissementDAO {
         $civResp = $enreg[strtoupper('civiliteResponsable')];
         $nomResp = $enreg[strtoupper('nomResponsable')];
         $prenomResp = $enreg[strtoupper('prenomResponsable')];
+        
+        $typeEtablissement = $enreg[strtoupper('typeEtablissement')];
+        $demandeAutorisation = $enreg[strtoupper('demandeAutorisation')];
+        $fraisHebergement = $enreg[strtoupper('fraisHebergement')];
 
-        $unEtab = new Etablissement($id, $nom, $adresse, $cdp, $ville, $tel, $email, $type, $civResp, $nomResp, $prenomResp);
+        $unEtab = new Etablissement($id, $nom, $adresse, $cdp, $ville, $tel, $email, $type, $civResp, $nomResp, $prenomResp, $typeEtablissement, $demandeAutorisation, $fraisHebergement);
 
         return $unEtab;
     }
@@ -58,6 +62,10 @@ class EtablissementDAO {
         $stmt->bindValue(':civ', $objetMetier->getCiviliteResp());
         $stmt->bindValue(':nomResp', $objetMetier->getNomResp());
         $stmt->bindValue(':prenomResp', $objetMetier->getPrenomResp());
+        
+        $stmt->bindValue(':typeEtablissement', $objetMetier->getTypeEtablissement());
+        $stmt->bindValue(':demandeAutorisation', $objetMetier->getDemandeAutorisation());
+        $stmt->bindValue(':fraisHebergement', $objetMetier->getFraisHebergement());
     }
 
     /**
@@ -104,7 +112,7 @@ class EtablissementDAO {
      * @return boolean =FALSE si l'opération échoue
      */
     public static function insert(Etablissement $objet) {
-        $requete = "INSERT INTO Etablissement VALUES (:id, :nom, :rue, :cdp, :ville, :tel, :email, :type, :civ, :nomResp, :prenomResp)";
+        $requete = "INSERT INTO Etablissement VALUES (:id, :nom, :rue, :cdp, :ville, :tel, :email, :type, :civ, :nomResp, :prenomResp, :typeEtablissement, :demandeAutorisation, :fraisHebergement)";
         $stmt = Bdd::getPdo()->prepare($requete);
         self::metierVersEnreg($objet, $stmt);
         $ok = $stmt->execute();
@@ -122,7 +130,7 @@ class EtablissementDAO {
         $requete = "UPDATE  Etablissement SET NOM=:nom, ADRESSERUE=:rue,
            CODEPOSTAL=:cdp, VILLE=:ville, TEL=:tel,
            ADRESSEELECTRONIQUE=:email, TYPE=:type,
-           CIVILITERESPONSABLE=:civ, NOMRESPONSABLE=:nomResp, PRENOMRESPONSABLE=:prenomResp 
+           CIVILITERESPONSABLE=:civ, NOMRESPONSABLE=:nomResp, PRENOMRESPONSABLE=:prenomResp, TYPEETABLISSEMENT=:typeEtablissement, DEMANDEAUTORISATION=:demandeAutorisation, FRAISHEBERGEMENT=:fraisHebergement
            WHERE ID=:id";
         $stmt = Bdd::getPdo()->prepare($requete);
         self::metierVersEnreg($objet, $stmt);
@@ -207,6 +215,32 @@ class EtablissementDAO {
             $stmt->execute();
         }
         return $stmt->fetchColumn(0);
+    }
+    
+    public static function getAllType() {
+        $requete = "SELECT DISTINCT typeEtablissement FROM Etablissement;";
+        $stmt = Bdd::getPdo()->prepare($requete);
+        $resultat = $stmt->execute();
+        if ($resultat) {
+            while ($enreg = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lesTypes[] = $enreg[strtoupper('typeEtablissement')];;
+            }
+        }
+        return $lesTypes;
+    }
+    
+    public static function getAllByType($type) {
+        $requete = "SELECT * FROM Etablissement WHERE type = :type";
+        $stmt = Bdd::getPdo()->prepare($requete);
+        $stmt->bindParam(':type', $type);
+        $ok = $stmt->execute();
+        // attention, $ok = true pour un select ne retournant aucune ligne
+        if ($ok) {
+            while ($enreg = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lesObjets[] = self::enregVersMetier($enreg);
+            }
+        }
+        return $lesObjets;
     }
 
 }

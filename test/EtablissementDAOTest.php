@@ -128,7 +128,7 @@ require_once __DIR__ . '/../includes/autoload.php';
         }
 
         // Test n°8
-        echo "<h3>7- isAnExistingName</h3>";
+        echo "<h3>8- isAnExistingName</h3>";
         try {
             // id et nom d'un établissement existant
             $id = "0350785N";
@@ -148,6 +148,34 @@ require_once __DIR__ . '/../includes/autoload.php';
         } catch (Exception $e) {
             echo "<h4>*** échec de la requête ***</h4>" . $e->getMessage();
         }
+        
+        
+   
+        
+        // Test n°9
+        echo "<h3>9- getAllType() </h3>";
+        try {
+            $lesTypes[] = EtablissementDAO::getAllType();
+            var_dump($lesTypes);
+        } catch (Exception $e) {
+            echo "<h4>*** échec de la requête ***</h4>" . $e->getMessage();
+        }
+        
+        
+        // Test n°10
+        echo "<h3>10 - getAllByType(type) </h3>";
+        try {
+            $unType = 'College';
+            //foreach(EtablissementDAO::getAllByType($unType)) {
+                
+            //}
+            $listObjets[]= EtablissementDAO::getAllByType($unType);
+            var_dump($listObjets);
+        } catch (Exception $e) {
+            echo "<h4>*** échec de la requête ***</h4>" . $e->getMessage();
+        }
+        
+       
 
         Bdd::deconnecter();
         ?>

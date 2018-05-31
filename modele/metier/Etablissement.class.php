@@ -60,7 +60,13 @@ class Etablissement {
      */
     private $prenomResp;
     
-    function __construct($id, $nom, $adresse, $cdp, $ville, $tel, $email, $typeEtab, $civiliteResp, $nomResp, $prenomResp) {
+    private $typeEtablissement;
+    
+    private $demandeAutorisation;
+    
+    private $fraisHebergement;
+    
+    function __construct($id, $nom, $adresse, $cdp, $ville, $tel, $email, $typeEtab, $civiliteResp, $nomResp, $prenomResp, $typeEtablissement, $demandeAutorisation, $fraisHebergement) {
         $this->id = $id;
         $this->nom = $nom;
         $this->adresse = $adresse;
@@ -72,6 +78,9 @@ class Etablissement {
         $this->civiliteResp = $civiliteResp;
         $this->nomResp = $nomResp;
         $this->prenomResp = $prenomResp;
+        $this->typeEtablissement = $typeEtablissement;
+        $this->demandeAutorisation = $demandeAutorisation;
+        $this->fraisHebergement = $fraisHebergement;
     }
 
     function getId() {
@@ -116,6 +125,18 @@ class Etablissement {
 
     function getPrenomResp() {
         return $this->prenomResp;
+    }
+    
+    function getTypeEtablissement() {
+        return $this->typeEtablissement;
+    }
+    
+    function getDemandeAutorisation() {
+        return $this->demandeAutorisation;
+    }
+    
+    function getFraisHebergement() {
+        return $this->fraisHebergement;
     }
 
     function setId($id) {
